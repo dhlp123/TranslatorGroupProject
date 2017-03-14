@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Genio()
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ genio,\ but\ nothing\ needing\ constructed\!\r\n
+comment1.params=
+comment1.target=java.lang.String\ getStr()
+comment1.text=\ \r\n\ getStr()\ \ is\ a\ private\ method\ which\ safely\ returns\ a\ string\ for\ use\r\n\ by\ the\ public\ methods\ getString()\ and\ getCharacter()\ in\ the\ class.\r\n\ \r\n\ @return\ String\ for\ further\ processing\ withing\ the\ class\r\n
+comment2.params=
+comment2.target=int\ getInteger()
+comment2.text=\ \r\n\ getInteger()\ returns\ an\ integer\ value.\ Exception\ handling\ is\ used\ to\ trap\r\n\ invalid\ data\ -\ including\ floating\ point\ numbers,\ non-numeric\ characters\r\n\ and\ no\ data.\ In\ the\ event\ of\ an\ exception,\ the\ user\ is\ prompted\ to\ enter\r\n\ the\ correct\ data\ in\ the\ correct\ format.\r\n\ \r\n\ @return\ validated\ int\ value\ \r\n
+comment3.params=
+comment3.target=float\ getFloat()
+comment3.text=\ \r\n\ getFloat()\ returns\ a\ floating\ point\ value.\ Exception\ handling\ is\ used\ to\ trap\r\n\ invalid\ data\ -\ including\ non-numeric\ characters\ and\ no\ data.\r\n\ In\ the\ event\ of\ an\ exception\ (normally\ no\ data\ or\ alpha),\ the\ user\ is\ prompted\ to\ enter\r\n\ data\ in\ the\ correct\ format\r\n\ \r\n\ @return\ validated\ float\ value\r\n
+comment4.params=
+comment4.target=double\ getDouble()
+comment4.text=\ \r\n\ getDouble()\ returns\ a\ double\ precision\ floating\ point\ value.\ \r\n\ Exception\ handling\ is\ used\ to\ trap\ invalid\ data\ -\ including\ non-numeric\r\n\ characters\ and\ no\ data.\r\n\ In\ the\ event\ of\ an\ exception,\ the\ user\ is\ prompted\ to\ enter\r\n\ data\ in\ the\ correct\ format\r\n\ \r\n\ @return\ validated\ double\ precision\ value\r\n
+comment5.params=
+comment5.target=char\ getCharacter()
+comment5.text=\ \r\n\ getCharacter()\ returns\ a\ character\ from\ the\ keyboard.\ It\ does\ this\ by\ \r\n\ reading\ a\ string\ then\ taking\ the\ first\ character\ read.\ Subsequent\ characters\r\n\ are\ discarded\ without\ raising\ an\ exception.\r\n\ The\ method\ checks\ to\ ensure\ a\ character\ has\ been\ entered,\ and\ prompts\ \r\n\ if\ it\ has\ not.\r\n\ \r\n\ @return\ validated\ character\ value\r\n
+comment6.params=
+comment6.target=java.lang.String\ getString()
+comment6.text=\ \r\n\ getString()\ returns\ a\ String\ entered\ at\ the\ keyboard.\r\n\ @return\ String\ value\r\n
+numComments=7
