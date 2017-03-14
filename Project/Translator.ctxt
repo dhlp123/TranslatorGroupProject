@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Translator()
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ Translator\r\n
+comment1.params=word\ isEnglish
+comment1.target=java.lang.String\ translateWord(java.lang.String,\ boolean)
+comment2.params=sentence\ isEnglish
+comment2.target=java.lang.String\ translateSentence(java.lang.String,\ boolean)
+comment3.params=engDict\ frenDict
+comment3.target=void\ loadDictionarys(java.lang.String,\ java.lang.String)
+comment4.params=fileName
+comment4.target=boolean\ fileExistsAndCanRead(java.lang.String)
+comment4.text=\r\n\ Method\ for\ checking\ if\ a\ file\ exists\ and\ is\ readable.\r\n\ \r\n\ @param\ String\ for\ file\ the\ user\ wants\ to\ check\r\n\ @return\ Boolean\ for\ wether\ the\ file\ does\ or\ does\ not\ exist\ and\ is\ readable.\r\n
+numComments=5

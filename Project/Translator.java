@@ -1,33 +1,102 @@
 
 /**
- * Write a description of class Translator here.
+ * Class used to Translate a sentence string from one language to another.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Douglas Parkinson
+ * @version 14/03/17
  */
-public class Translator
-{
-    // instance variables - replace the example below with your own
-    private int x;
 
+//Imports Dependencies
+import java.io.*;
+
+public class Translator
+{   
+    //Dictionary Tree Structures
+    private DictionaryTree english;
+    private DictionaryTree french;
+    
     /**
      * Constructor for objects of class Translator
      */
     public Translator()
     {
-        // initialise instance variables
-        x = 0;
+        english = new DictionaryTree();
+        french = new DictionaryTree();
     }
-
+    
+    public String translateWord(String word, boolean isEnglish){
+        String translation = "";
+        
+        
+        return translation;
+    }
+    
+    public String translateSentence(String sentence, boolean isEnglish){
+        String translation = "";
+        String[] words = sentence.split(" ");
+        for(String word : words){
+            translation += " "+translateWord(word, isEnglish);
+        }
+        return translation;
+    }
+    
+    public void loadDictionarys(String engDict, String frenDict){
+        if(fileExistsAndCanRead(engDict) == true && fileExistsAndCanRead(frenDict) == true){
+            try{
+                //Set up for english file
+                FileReader engReader = new FileReader(engDict);
+                BufferedReader engBuffer = new BufferedReader(engReader);
+                //Set up for french file
+                FileReader frenReader = new FileReader(frenDict);
+                BufferedReader frenBuffer = new BufferedReader(frenReader);
+                
+                //Reads from dictionary
+                String engLine = engBuffer.readLine();
+                String frenLine = frenBuffer.readLine();
+                do{
+                    //Generates ID for each language word node
+                    char[] engChars = engLine.toCharArray();
+                    char[] frenChars = frenLine.toCharArray();
+                    int engID = 0;
+                    int frenID = 0;
+                    String tempID = "";
+                    for(char c : engChars){
+                        int tempInt = (int) c;
+                        String tempString = String.valueOf(tempInt);
+                        tempID += tempString;
+                    }
+                    engID = Integer.parseInt(tempID);
+                    tempID = "";
+                    for(char c : frenChars){
+                        int tempInt = (int) c;
+                        String tempString = String.valueOf(tempInt);
+                        tempID += tempString;
+                    }
+                    frenID = Integer.parseInt(tempID);
+                    
+                    //Creates New Node for each Dictionary Tree
+                    english.addToTree(engID, engLine, frenLine);
+                    french.addToTree(frenID, engLine, frenLine);
+                }
+                while(engLine != null);
+                
+            }catch(IOException e){
+                System.out.println("IOException: Cannot read from file.");
+            }
+        }
+    }
+    
     /**
-     * An example of a method - replace this comment with your own
+     * Method for checking if a file exists and is readable.
      * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+     * @param String for file the user wants to check
+     * @return Boolean for wether the file does or does not exist and is readable.
      */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    public boolean fileExistsAndCanRead(String fileName){
+        if(new File(fileName).exists()==true && new File(fileName).canRead()==true){
+            return true;
+        }
+        return false;
     }
+    
 }

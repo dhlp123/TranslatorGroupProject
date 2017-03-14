@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.params=
+comment0.target=DictionaryTree()
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ DictionaryTree\r\n
+comment1.params=ID\ english\ french
+comment1.target=void\ addToTree(int,\ java.lang.String,\ java.lang.String)
+numComments=2
