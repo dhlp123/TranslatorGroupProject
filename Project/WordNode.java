@@ -1,33 +1,85 @@
 
+
 /**
  * Write a description of class WordNode here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Ryan Hutton) 
  */
 public class WordNode
 {
-    // instance variables - replace the example below with your own
     private int x;
-
     /**
-     * Constructor for objects of class WordNode
-     */
+    Integer ID
+    String english
+    String french
+    WordNode prev
+    WordNode left
+    WordNode right
+     **/
     public WordNode()
     {
         // initialise instance variables
         x = 0;
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
+    public String getEnglish()
     {
-        // put your code here
-        return x + y;
+        String english = "";
+        return english;
+    }
+
+    public String getFrench()
+    {
+        String french = "";
+        return french;
+    }
+    
+    public void getPrev()
+    {
+        /**
+      WordNode prev;
+      return prev;
+        **/
+    }
+    
+     public void setPrev()
+    {
+        /**
+      WordNode prev;
+      return prev;
+        **/
+    }
+    
+     public void getLeft()
+    {
+        /**
+      WordNode left;
+      return left;
+        **/
+    }
+    
+     public void setLeft()
+    {
+        /**
+      WordNode left;
+      return left;
+        **/
+    }
+    
+     public void getRight()
+    {
+        /**
+      WordNode right;
+      return right;
+        **/
+    }
+    
+     public void setRight()
+    {
+        /**
+      WordNode right;
+      return right;
+        **/
     }
 }
+

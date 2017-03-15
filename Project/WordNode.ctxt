@@ -1,8 +1,21 @@
 #BlueJ class context
 comment0.params=
 comment0.target=WordNode()
-comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ WordNode\r\n
-comment1.params=y
-comment1.target=int\ sampleMethod(int)
-comment1.text=\r\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\r\n\ \r\n\ @param\ \ y\ \ \ a\ sample\ parameter\ for\ a\ method\r\n\ @return\ \ \ \ \ the\ sum\ of\ x\ and\ y\ \r\n
-numComments=2
+comment0.text=\r\n\ \ \ \ Integer\ ID\r\n\ \ \ \ String\ english\r\n\ \ \ \ String\ french\r\n\ \ \ \ WordNode\ prev\r\n\ \ \ \ WordNode\ left\r\n\ \ \ \ WordNode\ right\r\n
+comment1.params=
+comment1.target=java.lang.String\ getEnglish()
+comment2.params=
+comment2.target=java.lang.String\ getFrench()
+comment3.params=
+comment3.target=void\ getPrev()
+comment4.params=
+comment4.target=void\ setPrev()
+comment5.params=
+comment5.target=void\ getLeft()
+comment6.params=
+comment6.target=void\ setLeft()
+comment7.params=
+comment7.target=void\ getRight()
+comment8.params=
+comment8.target=void\ setRight()
+numComments=9
