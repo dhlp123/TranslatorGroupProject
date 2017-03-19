@@ -1,5 +1,4 @@
 
-
 /**
  * Write a description of class WordNode here.
  * 
@@ -7,79 +6,80 @@
  */
 public class WordNode
 {
-    private int x;
-    /**
-    Integer ID
-    String english
-    String french
-    WordNode prev
-    WordNode left
-    WordNode right
-     **/
+    public Integer ID;
+    public String english;
+    public String french;
+
+    public WordNode prev;
+    public WordNode left;
+    public WordNode right;
+
     public WordNode()
     {
-        // initialise instance variables
-        x = 0;
+        // initialise instance variables      
+        ID = 0; 
+        english = "";
+        french = "";
+
+        prev = null;
+        left = null;
+        right = null;
+    }
+    
+     public WordNode(String english, String french)
+    {
+        this.english = english;
+        this.french = french; 
+        
+        prev = null; 
+        left = null; 
+        right = null;
     }
 
     public String getEnglish()
     {
-        String english = "";
         return english;
     }
 
     public String getFrench()
     {
-        String french = "";
         return french;
     }
-    
-    public void getPrev()
+
+    public WordNode getPrev()
     {
-        /**
-      WordNode prev;
-      return prev;
-        **/
+        return prev;
+    }
+
+    public WordNode getLeft()
+    {
+        return left;
+    }
+
+    public WordNode getRight()
+    {
+        return right;
     }
     
-     public void setPrev()
-    {
-        /**
-      WordNode prev;
-      return prev;
-        **/
+    public WordNode setLeft(WordNode left)
+    {        
+        this.left = left;
+        return left;       
     }
+
+    public WordNode setRight(WordNode right)
+    {
+        this.right = right;
+        return right; 
+    }
+
+    public WordNode setPrev()
+    {
+        this.prev = prev;
+        return prev;
+    }   
+
+
     
-     public void getLeft()
-    {
-        /**
-      WordNode left;
-      return left;
-        **/
-    }
-    
-     public void setLeft()
-    {
-        /**
-      WordNode left;
-      return left;
-        **/
-    }
-    
-     public void getRight()
-    {
-        /**
-      WordNode right;
-      return right;
-        **/
-    }
-    
-     public void setRight()
-    {
-        /**
-      WordNode right;
-      return right;
-        **/
-    }
 }
 
