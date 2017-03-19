@@ -14,7 +14,7 @@ public class Translator
     //Dictionary Tree Structures
     private DictionaryTree english;
     private DictionaryTree french;
-    
+
     /**
      * Constructor for objects of class Translator
      */
@@ -24,13 +24,31 @@ public class Translator
         french = new DictionaryTree();
     }
     
-    public String translateWord(String word, boolean isEnglish){
-        String translation = "";
-        
+    public String translateWord(String word){
+        return word; 
+    }
+
+    {
+        /**
+        GET WORD
+        CALL METHOD searchTree() IN DictionaryTree CLASS AND PASS IN WORD
+        SET tempWord TO THE RETURNED WordNode
+        IF TRANSTYPE == 1 THEN:
+        RETURN tempWord.getFrench()
+        END IF
+        ELSE DO:
+        RETURN tempWord.getEnglish()
+        END ELSE
+
+        public String translateWord(String word, boolean isEnglish)
+        String word
+
         
         return translation;
+
+         **/
     }
-    
+
     public String translateSentence(String sentence, boolean isEnglish){
         String translation = "";
         String[] words = sentence.split(" ");
@@ -39,7 +57,7 @@ public class Translator
         }
         return translation;
     }
-    
+
     public void loadDictionarys(String engDict, String frenDict){
         if(fileExistsAndCanRead(engDict) == true && fileExistsAndCanRead(frenDict) == true){
             try{
@@ -49,7 +67,7 @@ public class Translator
                 //Set up for french file
                 FileReader frenReader = new FileReader(frenDict);
                 BufferedReader frenBuffer = new BufferedReader(frenReader);
-                
+
                 //Reads from dictionary
                 String engLine = engBuffer.readLine();
                 String frenLine = frenBuffer.readLine();
@@ -73,19 +91,19 @@ public class Translator
                         tempID += tempString;
                     }
                     frenID = Integer.parseInt(tempID);
-                    
+
                     //Creates New Node for each Dictionary Tree
                     english.addToTree(engID, engLine, frenLine);
                     french.addToTree(frenID, engLine, frenLine);
                 }
                 while(engLine != null);
-                
+
             }catch(IOException e){
                 System.out.println("IOException: Cannot read from file.");
             }
         }
     }
-    
+
     /**
      * Method for checking if a file exists and is readable.
      * 
@@ -98,5 +116,5 @@ public class Translator
         }
         return false;
     }
-    
+
 }
