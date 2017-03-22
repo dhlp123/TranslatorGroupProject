@@ -23,6 +23,8 @@ public class Menu
     public static void main(String[] args)
     {
         Menu startMenu = new Menu();
+        startMenu.translator.loadDictionarys("englishDictionary.txt", "frenchDictionary.txt");
+        System.out.println("Loading Done");
         startMenu.processUserChoices();
     }
 

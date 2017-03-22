@@ -47,7 +47,7 @@ public class DictionaryTree
      * @param  english, french  Strings holding a word and its translation respectively     
      * @return boolean  shows whether word has been added successfully or not
      */
-    public boolean addToTree(int ID, String english, String french)
+    public boolean addToTree(String ID, String english, String french)
     {
         // create a new node
         WordNode newNode = new WordNode(ID, english, french); 
@@ -69,25 +69,27 @@ public class DictionaryTree
             while (currentNode != null)
             {
                 previousNode = currentNode;
-                if ((newNode.getID()) == (currentNode.getID()))
-                    return false; 
-                else if ((newNode.getID()) < (currentNode.getID()))
+                if ((newNode.getID()).equals(currentNode.getID())){
+                    return false;
+                }
+                
+                else if ((newNode.getID()).compareTo((currentNode.getID())) < 0)
                 {
                     //new Node's id smaller than current's go left
                     currentNode = currentNode.getLeft();
                 }
-                else if ((newNode.getID()) > (currentNode.getID()))
+                else if ((newNode.getID()).compareTo((currentNode.getID())) > 0)
                 {
                     //new Node's id greater than current's go right
                     currentNode = currentNode.getRight();
                 }
             }
-            if ((newNode.getID()) < (previousNode.getID()))
+            if ((newNode.getID()).compareTo((previousNode.getID())) < 0)
             {
                 //new Node's id smaller, set as left
                 previousNode.setLeft(newNode);
             }
-            else if ((newNode.getID()) > (previousNode.getID()))
+            else if ((newNode.getID()).compareTo((previousNode.getID())) > 0)
             {
                 //new Node's id greater, set as right
                 previousNode.setRight(newNode);
@@ -121,7 +123,7 @@ public class DictionaryTree
         {
             //
             traverseTree(processNode.getLeft());
-            System.out.println(processNode.getSummaryData());       // ?? get information from node how??
+            System.out.println(processNode.getSummaryData());       // ?? get information from node how?? [Try just accessing the getFrench() or getEnglish() and displaying the strings they return]
             traverseTree(processNode.getRight());
         }
     }
@@ -132,29 +134,29 @@ public class DictionaryTree
      * @param id     holds word that is being searched for
      * @return word  returns translation or deafult 'false' value
      */
-    public WordNode searchTree(int id)
+    public WordNode searchTree(String id)
     {
         boolean found = false;
         WordNode foundNode = null; 
-        WordNode processNode = new TreeNode();
+        WordNode processNode = new WordNode();
         //start processing at root
         processNode = root;
 
         while ((processNode != null) && (found == false))
         {
             //if IDs are the same find and return the mark of the student
-            if (id == (processNode.getID()))
+            if (id.equals(processNode.getID()))
             {
                 foundNode = processNode;
                 found = true;
                 return foundNode;
             }
-            else if (id < (processNode.getID()))
+            else if (id.compareTo((processNode.getID())) < 0)
             {
                 //given ID is smaller -> follow left branch
                 processNode = processNode.getLeft();
             }
-            else if (id > (processNode.getID()))
+            else if (id.compareTo((processNode.getID())) > 0)
             {
                 //given ID is greater -> follow right branch
                 processNode = processNode.getRight();
@@ -185,7 +187,7 @@ public class DictionaryTree
      * @param   id      Holds ID of the word to be deleted 
      * @return Boolean  whether deleted successfully or not
      */
-    public boolean removeFromTree(int id)
+    public boolean removeFromTree(String id)
     {
         boolean found = false;
         WordNode currentNode = new WordNode();
@@ -196,17 +198,17 @@ public class DictionaryTree
         while ((currentNode != null) && (found == false))
         {
             //compare IDs to see if they're the same
-            if (id == (currentNode.getID()))
+            if (id.equals(currentNode.getID()))
             {
                 found = true;
             }
-            else if (id < (currentNode.getID()))
+            else if (id.compareTo((currentNode.getID())) < 0)
             {
                 //save reference to previous node, given ID is smaller -> follow left branch
                 previousNode = currentNode;
                 currentNode = currentNode.getLeft();
             }
-            else if (id > (currentNode.getID()))
+            else if (id.compareTo((currentNode.getID())) > 0)
             {
                 //save reference to previous node, given ID is greater -> follow right branch
                 previousNode = currentNode;
@@ -226,7 +228,7 @@ public class DictionaryTree
                 //no children, delete reference from previous node
                 if (previousNode != null)
                 {
-                    if ((currentNode.getID()) < (previousNode.getID()))
+                    if ((currentNode.getID()).compareTo((previousNode.getID())) < 0)
                         previousNode.setLeft(null);
                     else
                         previousNode.setRight(null);
@@ -242,7 +244,7 @@ public class DictionaryTree
                 //1 child, left; set child as subtree to previous node
                 if (previousNode != null)
                 {
-                    if (((currentNode.getLeft()).getID()) < previousNode.getID())
+                    if (((currentNode.getLeft()).getID()).compareTo(previousNode.getID()) < 0)
                     {
                         previousNode.setLeft(currentNode.getLeft());
                     }
@@ -259,7 +261,7 @@ public class DictionaryTree
                 //1 child, right; set child as subtree to previous node
                 if (previousNode != null)
                 {
-                    if (((currentNode.getRight()).getID()) < previousNode.getID())
+                    if (((currentNode.getRight()).getID()).compareTo(previousNode.getID()) < 0)
                     {
                         previousNode.setLeft(currentNode.getRight());
                     }
@@ -286,7 +288,7 @@ public class DictionaryTree
                 //reconnect tree correctly and remove node from tree
                 if (previousNode != null)
                 {
-                    if (previousNode.getID() < nodeToDelete.getID())
+                    if (previousNode.getID().compareTo(nodeToDelete.getID()) < 0)
                         previousNode.setRight(nodeToDelete.getRight());
                     else
                         previousNode.setLeft(nodeToDelete.getLeft());

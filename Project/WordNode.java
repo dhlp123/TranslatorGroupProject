@@ -7,27 +7,69 @@
  */
 public class WordNode
 {
-    // instance variables - replace the example below with your own
-    private int x;
+    private String ID;
+    private String english;
+    private String french;
+    
+    private WordNode prev;
+    private WordNode left;
+    private WordNode right;
 
     /**
      * Constructor for objects of class WordNode
      */
-    public WordNode()
+    public WordNode(String id, String eng, String fren)
     {
-        // initialise instance variables
-        x = 0;
+        ID = id;
+        english = eng;
+        french = fren;
     }
+    
+    public WordNode(){
+        ID = "";
+        english = "";
+        french = "";
+    }
+    
+    public String getID(){
+        return ID;
+    }
+    
+    public String getEng(){
+        return english;
+    }
+    
+    public String getFren(){
+        return french;
+    }
+    
+    public WordNode getLeft(){
+        return left;
+    }
+    
+    public void setLeft(WordNode n){
+        left = n;
+    }
+    
+    public WordNode getRight(){
+        return right;
+    }
+    
+    public void setRight(WordNode n){
+        right = n;
+    }
+    
+    public WordNode getPrev(){
+        return prev;
+    }
+    
+    public void setPrev(WordNode n){
+        prev = n;
+    }
+    
+    public String getSummaryData(){
+        return "";
+    }
+    
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
-    }
 }

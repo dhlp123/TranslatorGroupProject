@@ -14,7 +14,7 @@ public class Translator
     //Dictionary Tree Structures
     private DictionaryTree english;
     private DictionaryTree french;
-    
+
     /**
      * Constructor for objects of class Translator
      */
@@ -23,14 +23,21 @@ public class Translator
         english = new DictionaryTree();
         french = new DictionaryTree();
     }
-    
+
+    public boolean addWord(String eng, String fren){
+        return false;
+    }
+
+    public boolean delWord(String word){
+        return false;
+    }
+
     public String translateWord(String word, boolean isEnglish){
         String translation = "";
-        
-        
+
         return translation;
     }
-    
+
     public String translateSentence(String sentence, boolean isEnglish){
         String translation = "";
         String[] words = sentence.split(" ");
@@ -39,7 +46,7 @@ public class Translator
         }
         return translation;
     }
-    
+
     public void loadDictionarys(String engDict, String frenDict){
         if(fileExistsAndCanRead(engDict) == true && fileExistsAndCanRead(frenDict) == true){
             try{
@@ -49,43 +56,31 @@ public class Translator
                 //Set up for french file
                 FileReader frenReader = new FileReader(frenDict);
                 BufferedReader frenBuffer = new BufferedReader(frenReader);
-                
+
                 //Reads from dictionary
                 String engLine = engBuffer.readLine();
                 String frenLine = frenBuffer.readLine();
                 do{
-                    //Generates ID for each language word node
-                    char[] engChars = engLine.toCharArray();
-                    char[] frenChars = frenLine.toCharArray();
-                    int engID = 0;
-                    int frenID = 0;
-                    String tempID = "";
-                    for(char c : engChars){
-                        int tempInt = (int) c;
-                        String tempString = String.valueOf(tempInt);
-                        tempID += tempString;
-                    }
-                    engID = Integer.parseInt(tempID);
-                    tempID = "";
-                    for(char c : frenChars){
-                        int tempInt = (int) c;
-                        String tempString = String.valueOf(tempInt);
-                        tempID += tempString;
-                    }
-                    frenID = Integer.parseInt(tempID);
+                    System.out.println(engLine + " " + frenLine);
                     
                     //Creates New Node for each Dictionary Tree
-                    english.addToTree(engID, engLine, frenLine);
-                    french.addToTree(frenID, engLine, frenLine);
+                    english.addToTree(engLine, engLine, frenLine);
+                    french.addToTree(frenLine, engLine, frenLine);
+
+                    //Reads next lines
+                    engLine = engBuffer.readLine();
+                    frenLine = frenBuffer.readLine();
+
                 }
                 while(engLine != null);
-                
+
             }catch(IOException e){
                 System.out.println("IOException: Cannot read from file.");
             }
         }
     }
     
+
     /**
      * Method for checking if a file exists and is readable.
      * 
@@ -98,5 +93,5 @@ public class Translator
         }
         return false;
     }
-    
+
 }
