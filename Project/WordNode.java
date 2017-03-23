@@ -67,9 +67,6 @@ public class WordNode
         prev = n;
     }
     
-    public String getSummaryData(){
-        return "";
-    }
     
 
 }
