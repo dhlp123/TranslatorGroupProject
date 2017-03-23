@@ -118,12 +118,12 @@ public class DictionaryTree
      */
     public void traverseTree(WordNode processNode)
     {
-        //
+        
         if (processNode != null)
         {
-            //
+            
             traverseTree(processNode.getLeft());
-            System.out.println(processNode.getSummaryData());       // ?? get information from node how?? [Try just accessing the getFrench() or getEnglish() and displaying the strings they return]
+            System.out.println("English: "+processNode.getEng() + " French:" + processNode.getFren());   //Changed this to print the details without the addition of another method
             traverseTree(processNode.getRight());
         }
     }

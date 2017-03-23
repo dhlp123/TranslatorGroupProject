@@ -46,6 +46,19 @@ public class Translator
         }
         return translation;
     }
+    
+    public void displayDictionary(){
+        System.out.println("Dictionary:\n ");
+        english.displayTree();
+    }
+    
+    public boolean isTreeEmpty(){
+        if(english.isTreeEmpty()){
+            return true;
+        }
+        
+        return false;
+    }
 
     public void loadDictionarys(String engDict, String frenDict){
         if(fileExistsAndCanRead(engDict) == true && fileExistsAndCanRead(frenDict) == true){

@@ -9,7 +9,6 @@ public class Menu
 {
     // instance variables
     Translator translator;
-    DictionaryTree tree;
     /**
      * Constructor for objects of class Menu
      */
@@ -17,7 +16,6 @@ public class Menu
     {
         // initialise instance variables
         translator = new Translator();
-        tree = new DictionaryTree();
     }
 
     public static void main(String[] args)
@@ -208,10 +206,9 @@ public class Menu
      */
     public void display()
     {
-        if ((tree.isTreeEmpty())== false)
-        {
-            System.out.println("Dictionary:\n "); 
-            tree.displayTree();
+        if ((translator.isTreeEmpty())== false)
+        { 
+            translator.displayDictionary();
         }
         else 
             System.out.println("Error: Dictionary is empty.");
