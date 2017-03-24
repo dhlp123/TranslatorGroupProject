@@ -34,6 +34,26 @@ public class Translator
 
     public String translateWord(String word, boolean isEnglish){
         String translation = "";
+        {
+        /**
+        GET WORD
+        CALL METHOD searchTree() IN DictionaryTree CLASS AND PASS IN WORD
+        SET tempWord TO THE RETURNED WordNode
+        IF TRANSTYPE == 1 THEN:
+        RETURN tempWord.getFrench()
+        END IF
+        ELSE DO:
+        RETURN tempWord.getEnglish()
+        END ELSE
+
+        public String translateWord(String word, boolean isEnglish)
+        String word
+
+        
+        return translation;
+
+         **/
+    }
 
         return translation;
     }
