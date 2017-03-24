@@ -2,71 +2,88 @@
 /**
  * Write a description of class WordNode here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Ryan Hutton) 
  */
 public class WordNode
 {
-    private String ID;
-    private String english;
-    private String french;
-    
-    private WordNode prev;
-    private WordNode left;
-    private WordNode right;
+    public String ID;
+    public String english;
+    public String french;
 
-    /**
-     * Constructor for objects of class WordNode
-     */
-    public WordNode(String id, String eng, String fren)
+    public WordNode prev;
+    public WordNode left;
+    public WordNode right;
+
+    public WordNode()
     {
-        ID = id;
-        english = eng;
-        french = fren;
-    }
-    
-    public WordNode(){
-        ID = "";
+        // initialise instance variables      
+        ID = ""; 
         english = "";
         french = "";
+
+        prev = null;
+        left = null;
+        right = null;
+    }
+    
+     public WordNode(String ID, String english, String french)
+    {
+        this.ID = ID;
+        this.english = english;
+        this.french = french; 
+        
+        prev = null; 
+        left = null; 
+        right = null;
     }
     
     public String getID(){
-        return ID;
+        return this.ID;
     }
-    
-    public String getEng(){
+
+    public String getEng()
+    {
         return english;
     }
-    
-    public String getFren(){
+
+    public String getFren()
+    {
         return french;
     }
-    
-    public WordNode getLeft(){
+
+    public WordNode getPrev()
+    {
+        return prev;
+    }
+
+    public WordNode getLeft()
+    {
         return left;
     }
-    
-    public void setLeft(WordNode n){
-        left = n;
-    }
-    
-    public WordNode getRight(){
+
+    public WordNode getRight()
+    {
         return right;
     }
     
-    public void setRight(WordNode n){
-        right = n;
+    public WordNode setLeft(WordNode left)
+    {        
+        this.left = left;
+        return left;       
     }
-    
-    public WordNode getPrev(){
-        return prev;
-    }
-    
-    public void setPrev(WordNode n){
-        prev = n;
-    }
-    
-    
 
+    public WordNode setRight(WordNode right)
+    {
+        this.right = right;
+        return right; 
+    }
+
+    public WordNode setPrev(WordNode prev)
+    {
+        this.prev = prev;
+        return prev;
+    }   
+
+
+    
 }
