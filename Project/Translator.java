@@ -34,27 +34,12 @@ public class Translator
 
     public String translateWord(String word, boolean isEnglish){
         String translation = "";
-        {
-        /**
-        GET WORD
-        CALL METHOD searchTree() IN DictionaryTree CLASS AND PASS IN WORD
-        SET tempWord TO THE RETURNED WordNode
-        IF TRANSTYPE == 1 THEN:
-        RETURN tempWord.getFrench()
-        END IF
-        ELSE DO:
-        RETURN tempWord.getEnglish()
-        END ELSE
-
-        public String translateWord(String word, boolean isEnglish)
-        String word
-
-        
-        return translation;
-
-         **/
-    }
-
+        if (isEnglish == true){
+            translation = french.searchTree(word).getFren();
+        }
+        else if(isEnglish == false){
+            translation = english.searchTree(word).getEng();
+        }
         return translation;
     }
 
@@ -66,17 +51,17 @@ public class Translator
         }
         return translation;
     }
-    
+
     public void displayDictionary(){
         System.out.println("Dictionary:\n ");
         english.displayTree();
     }
-    
+
     public boolean isTreeEmpty(){
         if(english.isTreeEmpty()){
             return true;
         }
-        
+
         return false;
     }
 
@@ -95,7 +80,7 @@ public class Translator
                 String frenLine = frenBuffer.readLine();
                 do{
                     System.out.println(engLine + " " + frenLine);
-                    
+
                     //Creates New Node for each Dictionary Tree
                     english.addToTree(engLine, engLine, frenLine);
                     french.addToTree(frenLine, engLine, frenLine);
@@ -112,7 +97,6 @@ public class Translator
             }
         }
     }
-    
 
     /**
      * Method for checking if a file exists and is readable.
