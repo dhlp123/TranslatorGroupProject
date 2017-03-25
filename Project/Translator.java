@@ -36,10 +36,20 @@ public class Translator
         String translation = "";
         
         if (isEnglish == true){
-            translation = french.searchTree(word).getFren();
+            WordNode node = english.searchTree(word);
+            if(node == null){
+                return word;
+            }else{
+                translation = node.getFren();
+            }
         }
         else if(isEnglish == false){
-            translation = english.searchTree(word).getEng();
+            WordNode node = french.searchTree(word);
+            if(node == null){
+                return word;
+            }else{
+                translation = node.getEng();
+            }
         }
 
         return translation;
@@ -49,8 +59,9 @@ public class Translator
         String translation = "";
         String[] words = sentence.split(" ");
         for(String word : words){
-            translation += " "+translateWord(word, isEnglish);
+            translation += " "+translateWord(word.toLowerCase(), isEnglish);
         }
+        
         return translation;
     }
 

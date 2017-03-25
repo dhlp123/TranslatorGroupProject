@@ -103,7 +103,7 @@ public class Menu
         enWord = Genio.getString();
         frWord = translator.translateSentence(enWord, true);
         //display the translation
-        System.out.println("\nThe translation to " +enWord+ "is: \n" +frWord+ ".");
+        System.out.println("\nThe translation for " +enWord+ " is: \n" +frWord+ ".");
         System.out.println("\nPlease press Enter to continue.");
         // Clear terminal
         Genio.getString();
@@ -126,7 +126,7 @@ public class Menu
         frWord = Genio.getString();
         enWord = translator.translateSentence(frWord, false);
         //display the translation
-        System.out.println("\nThe translation to " +frWord+ "is: \n" +enWord+ ".");
+        System.out.println("\nThe translation for " +frWord+ " is: \n" +enWord+ ".");
         System.out.println("\nPlease press Enter to continue.");
         // Clear terminal
         Genio.getString();
