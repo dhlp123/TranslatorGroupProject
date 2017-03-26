@@ -135,7 +135,7 @@ public class Translator
                     String engLine = dictLine.split("~")[0];
                     String frenLine = dictLine.split("~")[1];
 
-                    System.out.println(engLine + " " + frenLine);
+                    //System.out.println(engLine + " " + frenLine);
 
                     //Creates New Node for each Dictionary Tree
                     english.addToTree(engLine, engLine, frenLine);
@@ -165,7 +165,7 @@ public class Translator
                 String frenLine = frenBuffer.readLine();
                 do{
 
-                    System.out.println(engLine + " " + frenLine);
+                    //System.out.println(engLine + " " + frenLine);
 
                     //Creates New Node for each Dictionary Tree
                     if(engLine != null && frenLine != null){
