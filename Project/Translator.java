@@ -86,7 +86,7 @@ public class Translator
                 FileReader dictReader = new FileReader(randDict);
                 BufferedReader dictBuffer = new BufferedReader(dictReader);
 
-                //Reads from dictionary
+                //Reads from main dictionary
                 String dictLine = dictBuffer.readLine();
                 do{
                     String engLine = dictLine.split("~")[0];
@@ -103,6 +103,36 @@ public class Translator
 
                 }
                 while(dictLine != null);
+                
+            }catch(IOException e){
+                System.out.println("IOException: Cannot read from file.");
+            }
+        }
+        if(fileExistsAndCanRead("customEnglishDictionary.txt") == true && fileExistsAndCanRead("customFrenchDictionary.txt") == true){
+            try{
+                
+                //Set up for custom Dictionary files
+                FileReader engReader = new FileReader("customEnglishDictionary.txt");
+                BufferedReader engBuffer = new BufferedReader(engReader);
+                FileReader frenReader = new FileReader("customFrenchDictionary.txt");
+                BufferedReader frenBuffer = new BufferedReader(frenReader);
+
+                //Reads from main dictionary
+                String engLine = engBuffer.readLine();
+                String frenLine = frenBuffer.readLine();
+                do{
+                    
+                    System.out.println(engLine + " " + frenLine);
+
+                    //Creates New Node for each Dictionary Tree
+                    english.addToTree(engLine, engLine, frenLine);
+                    french.addToTree(frenLine, engLine, frenLine);
+
+                    //Reads next lines
+                    engLine = engBuffer.readLine();
+                    frenLine = frenBuffer.readLine();
+                }
+                while(engLine != null);
                 
             }catch(IOException e){
                 System.out.println("IOException: Cannot read from file.");
@@ -126,8 +156,8 @@ public class Translator
         /**
      * Searches for a word to delete from the dictionary, deletes it and saves the dictionary
      */
-    public void deleteWords() {
-        String cEngDictName = "customEnlishDictionary.txt";
+    public boolean deleteWords() {
+        String cEngDictName = "customEnglishDictionary.txt";
         String cFrenchDictName = "customFrenchDictionary.txt";
 
         createCustomDictionaryFiles(cEngDictName);
@@ -142,6 +172,7 @@ public class Translator
         int savedIndex = 0;
         char userChoice = 'b';
         boolean userEnd = false;
+        boolean deleted = false;
         StringBuffer searchableText = new StringBuffer(cEngText);
         StringBuffer finalText = searchableText;
         System.out.println(cEngText);
@@ -180,9 +211,9 @@ public class Translator
                 }
             }
             // System.out.println(finalText.toString());
-            overrideCustomDictionary(finalText.toString(), cEngDictName);
+            deleted = overrideCustomDictionary(finalText.toString(), cEngDictName);
         }
-
+        return deleted;
     }
 
     /**
@@ -193,7 +224,7 @@ public class Translator
      * @param dictName,
      *            the dictionary to override
      */
-    public void overrideCustomDictionary(String ovrText, String dictName) {
+    public boolean overrideCustomDictionary(String ovrText, String dictName) {
 
         FileOutputStream outputStream = null;
         PrintWriter printWriter = null;
@@ -202,17 +233,20 @@ public class Translator
             printWriter = new PrintWriter(outputStream);
         } catch (IOException e) {
             System.out.println("An error occurred overriding files");
+            return false;
         }
         printWriter.print(ovrText);
         printWriter.close();
+        
+        return true;
     }
 
     /**
      * Allows the user to add words to the custom dictionary files to be loaded
      * by the loadDictionaries method
      */
-    public void addWords() {
-        String cEngDictName = "customEnlishDictionary.txt";
+    public boolean addWords() {
+        String cEngDictName = "customEnglishDictionary.txt";
         String cFrenchDictName = "customFrenchDictionary.txt";
 
         createCustomDictionaryFiles(cEngDictName);
@@ -235,6 +269,7 @@ public class Translator
 
         } catch (IOException e) {
             System.out.println("An error occurred opening the custom english dictionary to write");
+            return false;
         }
         String userString = "";
         int numOfEntries = 0;
@@ -247,12 +282,13 @@ public class Translator
                 try {
                     engBW.write(userString + "\n");
                     System.out.print("French word: "); // appends current word
-                                                        // to custom english
-                                                        // dictionary and asks
-                                                        // for the french
-                                                        // equivalent
+                                                       // to custom english
+                                                       // dictionary and asks
+                                                       // for the french
+                                                       // equivalent
                 } catch (IOException e) {
                     e.printStackTrace();
+                    return false;
                 }
             } else {
                 try {
@@ -265,6 +301,7 @@ public class Translator
                                                         // dictionary
                 } catch (IOException e) {
                     e.printStackTrace();
+                    return false;
                 }
             }
             numOfEntries++;
@@ -279,8 +316,10 @@ public class Translator
                 engFW.close();
             if (frFW != null)
                 frFW.close();
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 

@@ -140,19 +140,10 @@ public class Menu
      * @return None 
      */
     public void addWord()
-    {
-        //var
-        String frWord;
-        String enWord;
-        //prompt user for english and french words to be added
-        System.out.println("Please give the English word you want to add:");
-        enWord = Genio.getString();
-        System.out.println("\nPlease give the French translation:");
-        frWord = Genio.getString();
+    {   
+        //error catching in translator class??
         
-        //error cathcing in translator class??
-        
-        if ((translator.addWord(enWord, frWord)) == true)
+        if ((translator.addWords()) == true)
         {
             System.out.println("\nWord added successfully!");
         }
@@ -175,15 +166,9 @@ public class Menu
      */
     public void delWord()
     {
-        //var
-        String word;
         
-        //prompt user for english and french words to be added
-        System.out.println("Please give the word you want to remove:");
-        word = Genio.getString();
-        
-        //error cathcing in translator class??
-        if ((translator.delWord(word) == true))
+        //error catching in translator class??
+        if ((translator.deleteWords() == true))
         {
             System.out.println("\nWord removed successfully!");
         }
