@@ -123,7 +123,7 @@ public class DictionaryTree
         {
             
             traverseTree(processNode.getLeft());
-            System.out.println("English: "+processNode.getEng() + " French:" + processNode.getFren());   //Changed this to print the details without the addition of another method
+            System.out.println("English: "+processNode.getEng() + " French: " + processNode.getFren());   //Changed this to print the details without the addition of another method
             traverseTree(processNode.getRight());
         }
     }

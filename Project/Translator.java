@@ -24,14 +24,14 @@ public class Translator
         french = new DictionaryTree();
     }
 
-    public boolean addWord(String eng, String fren){
-        return false;
-    }
-
-    public boolean delWord(String word){
-        return false;
-    }
-
+    /**
+     * Method translateWord
+     * Takes in a string and translates it by searching the binary tree for it's translated counterpart.
+     *
+     * @param word A parameter for the word taken in to be translated.
+     * @param isEnglish A parameter for whether the word is in English or not.
+     * @return The return value for the translated word.
+     */
     public String translateWord(String word, boolean isEnglish){
         String translation = "";
         
@@ -55,21 +55,59 @@ public class Translator
         return translation;
     }
 
+    /**
+     * Method translateSentence
+     * Takes in a string and translates it to another language.
+     *
+     * @param sentence A parameter for the sentence that we want translated.
+     * @param isEnglish A parameter for whether this sentence is in english or not.
+     * @return The return value for the translated sentence.
+     */
     public String translateSentence(String sentence, boolean isEnglish){
         String translation = "";
         String[] words = sentence.split(" ");
-        for(String word : words){
-            translation += " "+translateWord(word.toLowerCase(), isEnglish);
+        String twoWords = "";
+        String threeWords = "";
+        for(int i=0;i<words.length;i++){
+            if(i+1 < words.length){
+                twoWords = translateWord(words[i].toLowerCase()+ " " + words[i+1].toLowerCase(), isEnglish);
+            }
+            if(i+2 < words.length){
+                threeWords = translateWord(words[i].toLowerCase() + " " + words[i+1].toLowerCase() + " " + words[i+2].toLowerCase(), isEnglish);
+            }
+            
+            if(twoWords.equals("") == false && twoWords.equals(words[i].toLowerCase()+ " " + words[i+1].toLowerCase()) == false){
+                translation += " "+twoWords;
+                i +=1;
+            }
+            else if(threeWords.equals("") == false && threeWords.equals(words[i].toLowerCase() + " " + words[i+1].toLowerCase() + " " + words[i+2].toLowerCase()) == false){
+                translation += " "+threeWords;
+                i +=2;
+            }
+            else{
+                translation += " "+translateWord(words[i].toLowerCase(), isEnglish);
+            }
+            twoWords = "";
+            threeWords = "";
         }
         
         return translation;
     }
 
+    /**
+     * Method displayDictionary
+     *  Displays the dictionary in alphabetical order.
+     */
     public void displayDictionary(){
         System.out.println("Dictionary:\n ");
         english.displayTree();
     }
 
+    /**
+     * Method isTreeEmpty
+     *
+     * @return The return value of whether the tree is emtpy or not.
+     */
     public boolean isTreeEmpty(){
         if(english.isTreeEmpty()){
             return true;
@@ -78,6 +116,12 @@ public class Translator
         return false;
     }
 
+    
+    /**
+     * Method loadDictionarys
+     *
+     * @param randDict A parameter for the file name of the main Dictionary file.
+     */
     public void loadDictionarys(String randDict){
         if(fileExistsAndCanRead(randDict)){
             try{
@@ -125,8 +169,10 @@ public class Translator
                     System.out.println(engLine + " " + frenLine);
 
                     //Creates New Node for each Dictionary Tree
-                    english.addToTree(engLine, engLine, frenLine);
-                    french.addToTree(frenLine, engLine, frenLine);
+                    if(engLine != null && frenLine != null){
+                        english.addToTree(engLine, engLine, frenLine);
+                        french.addToTree(frenLine, engLine, frenLine);
+                    }
 
                     //Reads next lines
                     engLine = engBuffer.readLine();
