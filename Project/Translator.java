@@ -347,7 +347,7 @@ public class Translator
         System.out.println(
             "Enter each word you would like to add to the dictionary, pressing return between words\nLeave your entry blank and press return to return to the menu");
         System.out.print("English word: ");
-        userString = Genio.getString();
+        userString = Genio.getString().toLowerCase();
         eng = userString;
         while (userString.length() != 0) {
             if (numOfEntries % 2 == 0) {
@@ -377,7 +377,7 @@ public class Translator
                 }
             }
             numOfEntries++;
-            userString = Genio.getString();
+            userString = Genio.getString().toLowerCase();
             fren = userString;
             if(eng != null && fren != null){
                 english.addToTree(eng, eng, fren);
