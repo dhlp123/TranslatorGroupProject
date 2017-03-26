@@ -2,8 +2,8 @@
 /**
  * Class used to Translate a sentence string from one language to another.
  * 
- * @author Douglas Parkinson
- * @version 14/03/17
+ * @author Douglas Parkinson, Nathan Darroch and Ryan Hutton.
+ * @version 26/03/17
  */
 
 //Imports Dependencies
@@ -34,7 +34,7 @@ public class Translator
      */
     public String translateWord(String word, boolean isEnglish){
         String translation = "";
-        
+
         if (isEnglish == true){
             WordNode node = english.searchTree(word);
             if(node == null){
@@ -75,7 +75,7 @@ public class Translator
             if(i+2 < words.length){
                 threeWords = translateWord(words[i].toLowerCase() + " " + words[i+1].toLowerCase() + " " + words[i+2].toLowerCase(), isEnglish);
             }
-            
+
             if(twoWords.equals("") == false && twoWords.equals(words[i].toLowerCase()+ " " + words[i+1].toLowerCase()) == false){
                 translation += " "+twoWords;
                 i +=1;
@@ -90,7 +90,7 @@ public class Translator
             twoWords = "";
             threeWords = "";
         }
-        
+
         return translation;
     }
 
@@ -116,7 +116,6 @@ public class Translator
         return false;
     }
 
-    
     /**
      * Method loadDictionarys
      *
@@ -125,7 +124,7 @@ public class Translator
     public void loadDictionarys(String randDict){
         if(fileExistsAndCanRead(randDict)){
             try{
-                
+
                 //Set up for rand Dictionary file
                 FileReader dictReader = new FileReader(randDict);
                 BufferedReader dictBuffer = new BufferedReader(dictReader);
@@ -135,7 +134,7 @@ public class Translator
                 do{
                     String engLine = dictLine.split("~")[0];
                     String frenLine = dictLine.split("~")[1];
-                    
+
                     System.out.println(engLine + " " + frenLine);
 
                     //Creates New Node for each Dictionary Tree
@@ -147,14 +146,14 @@ public class Translator
 
                 }
                 while(dictLine != null);
-                
+
             }catch(IOException e){
                 System.out.println("IOException: Cannot read from file.");
             }
         }
         if(fileExistsAndCanRead("customEnglishDictionary.txt") == true && fileExistsAndCanRead("customFrenchDictionary.txt") == true){
             try{
-                
+
                 //Set up for custom Dictionary files
                 FileReader engReader = new FileReader("customEnglishDictionary.txt");
                 BufferedReader engBuffer = new BufferedReader(engReader);
@@ -165,7 +164,7 @@ public class Translator
                 String engLine = engBuffer.readLine();
                 String frenLine = frenBuffer.readLine();
                 do{
-                    
+
                     System.out.println(engLine + " " + frenLine);
 
                     //Creates New Node for each Dictionary Tree
@@ -179,7 +178,7 @@ public class Translator
                     frenLine = frenBuffer.readLine();
                 }
                 while(engLine != null);
-                
+
             }catch(IOException e){
                 System.out.println("IOException: Cannot read from file.");
             }
@@ -198,8 +197,8 @@ public class Translator
         }
         return false;
     }
-    
-        /**
+
+    /**
      * Searches for a word to delete from the dictionary, deletes it and saves the dictionary
      */
     public boolean deleteWords() {
@@ -213,28 +212,45 @@ public class Translator
         String cFrText = openUserFileAndRead(cFrenchDictName);
 
         String userSearch = "";
+        String frenchWord = "";
+        
         int index = 0;
         int indexEnd = 0;
         int savedIndex = 0;
+        
+        int indexFrench = 0;
+        int indexEndFrench = 0;
+        int savedIndexFrench = 0;
+        
         char userChoice = 'b';
+        
         boolean userEnd = false;
         boolean deleted = false;
+        
         StringBuffer searchableText = new StringBuffer(cEngText);
+        StringBuffer searchableTextFrench = new StringBuffer(cFrText);
         StringBuffer finalText = searchableText;
+        StringBuffer finalTextFrench = searchableTextFrench;
+        
         System.out.println(cEngText);
         System.out.println("Enter the word you would like to search for");
         userSearch = Genio.getString();
         while (userEnd == false) {
             if (cEngText.indexOf(userSearch) < 0) {
-                System.out.print("String not found");
+                System.out.print("String not found, please enter another:");
                 userSearch = Genio.getString();
                 continue;
             }
+            frenchWord = english.searchTree(userSearch).getFren();
             while (userEnd == false) {
                 index = searchableText.indexOf(userSearch);
                 indexEnd = index + userSearch.length();
+                indexFrench = searchableTextFrench.indexOf(frenchWord);
+                indexEndFrench = indexFrench + frenchWord.length();
+                
                 System.out.println("String " + userSearch + " found in custom dictionary");
-                System.out.println("Delete " + searchableText.substring(index, indexEnd) + "? [Y/N]");
+                System.out.println("Delete " + searchableText.substring(index, indexEnd) + "? [Y/N/Q]");
+                
                 userChoice = Genio.getCharacter();
                 while (true) {
                     if (userChoice == 'q' || userChoice == 'Q') {
@@ -243,21 +259,28 @@ public class Translator
                     }
                     if (userChoice == 'y' || userChoice == 'Y') {
                         finalText.replace(index, indexEnd + 1, "");
+                        finalTextFrench.replace(indexFrench, indexEndFrench + 1, "");
+                        english.removeFromTree(userSearch);
+                        french.removeFromTree(frenchWord);
                         userEnd = true;
                         break;
                     }
                     if (userChoice == 'n' || userChoice == 'N') {
                         savedIndex = indexEnd + 1;
+                        savedIndexFrench = indexEndFrench + 1;
+                        
                         searchableText.replace(0, indexEnd + 1, "");
+                        searchableTextFrench.replace(0, indexEndFrench + 1, "");
                         break;
                     }
                     System.out.println("Invalid character entered, Y to delete, N to search for next instance of \""
-                            + userSearch + "\" or Q to return to menu");
+                        + userSearch + "\" or Q to return to menu");
                     userChoice = Genio.getCharacter();
                 }
             }
             // System.out.println(finalText.toString());
             deleted = overrideCustomDictionary(finalText.toString(), cEngDictName);
+            overrideCustomDictionary(finalTextFrench.toString(), cFrenchDictName);
         }
         return deleted;
     }
@@ -283,7 +306,7 @@ public class Translator
         }
         printWriter.print(ovrText);
         printWriter.close();
-        
+
         return true;
     }
 
@@ -319,19 +342,22 @@ public class Translator
         }
         String userString = "";
         int numOfEntries = 0;
+        String eng = "";
+        String fren = "";
         System.out.println(
-                "Enter each word you would like to add to the dictionary, pressing return between words\nLeave your entry blank and press return to return to the menu");
+            "Enter each word you would like to add to the dictionary, pressing return between words\nLeave your entry blank and press return to return to the menu");
         System.out.print("English word: ");
         userString = Genio.getString();
+        eng = userString;
         while (userString.length() != 0) {
             if (numOfEntries % 2 == 0) {
                 try {
                     engBW.write(userString + "\n");
                     System.out.print("French word: "); // appends current word
-                                                       // to custom english
-                                                       // dictionary and asks
-                                                       // for the french
-                                                       // equivalent
+                    // to custom english
+                    // dictionary and asks
+                    // for the french
+                    // equivalent
                 } catch (IOException e) {
                     e.printStackTrace();
                     return false;
@@ -340,11 +366,11 @@ public class Translator
                 try {
                     frBW.write(userString + "\n");
                     System.out.print("English word: "); // appends current word
-                                                        // to french dictionary
-                                                        // and asks for a new
-                                                        // word to be added to
-                                                        // the english
-                                                        // dictionary
+                    // to french dictionary
+                    // and asks for a new
+                    // word to be added to
+                    // the english
+                    // dictionary
                 } catch (IOException e) {
                     e.printStackTrace();
                     return false;
@@ -352,6 +378,13 @@ public class Translator
             }
             numOfEntries++;
             userString = Genio.getString();
+            fren = userString;
+            if(eng != null && fren != null){
+                english.addToTree(eng, eng, fren);
+                french.addToTree(fren, eng, fren);
+                eng = "";
+                fren = "";
+            }
         }
         try {
             if (engBW != null)
