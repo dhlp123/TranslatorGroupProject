@@ -3889,7 +3889,6 @@ inc~inc
 codswallop~codswallop
 crease's~crease's
 repay~rembourser
-EST~est
 beneficiary~Bénéficiaire
 packet's~paquet de
 cruet's~cruet's
@@ -20226,7 +20225,7 @@ Pokemon~Pokemon
 spellbinders~spellbinders
 Dewey~Dewey
 Yuma~Yuma
-dead~dead
+dead~mort
 fathering~fathering
 vacationer's~vacationer de
 Yaroslavl's~Yaroslavl de

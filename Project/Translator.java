@@ -38,17 +38,23 @@ public class Translator
         if (isEnglish == true){
             WordNode node = english.searchTree(word);
             if(node == null){
+                System.out.println("DEBUG: " + word + " NOT FOUND");
                 return word;
             }else{
                 translation = node.getFren();
             }
         }
         else if(isEnglish == false){
-            WordNode node = french.searchTree(word);
-            if(node == null){
-                return word;
-            }else{
-                translation = node.getEng();
+            if(word.equals("la") || word.equals("le")){
+                return "the";
+            }
+            else{
+                WordNode node = french.searchTree(word);
+                if(node == null){
+                    return word;
+                }else{
+                    translation = node.getEng();
+                }
             }
         }
 
@@ -136,6 +142,10 @@ public class Translator
                     String frenLine = dictLine.split("~")[1];
 
                     //System.out.println(engLine + " " + frenLine);
+                    if(engLine != null && frenLine != null){
+                        engLine = engLine.toLowerCase();
+                        frenLine = frenLine.toLowerCase();
+                    }
 
                     //Creates New Node for each Dictionary Tree
                     english.addToTree(engLine, engLine, frenLine);
@@ -166,6 +176,11 @@ public class Translator
                 do{
 
                     //System.out.println(engLine + " " + frenLine);
+
+                    if(engLine != null && frenLine != null){
+                        engLine = engLine.toLowerCase();
+                        frenLine = frenLine.toLowerCase();
+                    }
 
                     //Creates New Node for each Dictionary Tree
                     if(engLine != null && frenLine != null){
@@ -213,25 +228,25 @@ public class Translator
 
         String userSearch = "";
         String frenchWord = "";
-        
+
         int index = 0;
         int indexEnd = 0;
         int savedIndex = 0;
-        
+
         int indexFrench = 0;
         int indexEndFrench = 0;
         int savedIndexFrench = 0;
-        
+
         char userChoice = 'b';
-        
+
         boolean userEnd = false;
         boolean deleted = false;
-        
+
         StringBuffer searchableText = new StringBuffer(cEngText);
         StringBuffer searchableTextFrench = new StringBuffer(cFrText);
         StringBuffer finalText = searchableText;
         StringBuffer finalTextFrench = searchableTextFrench;
-        
+
         System.out.println(cEngText);
         System.out.println("Enter the word you would like to search for");
         userSearch = Genio.getString();
@@ -254,10 +269,10 @@ public class Translator
                 indexEnd = index + userSearch.length();
                 indexFrench = searchableTextFrench.indexOf(frenchWord);
                 indexEndFrench = indexFrench + frenchWord.length();
-                
+
                 System.out.println("String " + userSearch + " found in custom dictionary");
                 System.out.println("Delete " + searchableText.substring(index, indexEnd) + "? [Y/N/Q]");
-                
+
                 userChoice = Genio.getCharacter();
                 while (true) {
                     if (userChoice == 'q' || userChoice == 'Q') {
