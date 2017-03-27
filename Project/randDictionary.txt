@@ -68004,7 +68004,7 @@ Olmec~olmèque
 unmans~unmans
 doffed~doffed
 adulteress~femme adultère
-do~do
+do~fais
 aisles~allées
 retrenching~retranchant
 digests~digests
@@ -89236,7 +89236,7 @@ hassock~coussin
 yuppified~yuppified
 superstitious~superstitieux
 gimps~gimps
-want's~veut
+wants~veut
 candler's~Candler de
 GAO~GAO
 wayfarer's~Wayfarer de

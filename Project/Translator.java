@@ -38,7 +38,6 @@ public class Translator
         if (isEnglish == true){
             WordNode node = english.searchTree(word);
             if(node == null){
-                System.out.println("DEBUG: " + word + " NOT FOUND");
                 return word;
             }else{
                 translation = node.getFren();
@@ -47,6 +46,39 @@ public class Translator
         else if(isEnglish == false){
             if(word.equals("la") || word.equals("le")){
                 return "the";
+            }
+            else if(word.equals("es") || word.equals("sommes") || word.equals("êtes") || word.equals("sont")){
+                return "are";
+            }
+            else if(word.equals("avons") || word.equals("avez") || word.equals("ont")){
+                return "have";
+            }
+            else if(word.equals("peux") || word.equals("peut") || word.equals("pouvons") || word.equals("pouvez") || word.equals("peuvent")){
+                return "can";
+            }
+            else if(word.equals("fait")){
+                return "does";
+            }
+            else if(word.equals("faisons") ||word.equals("faites") || word.equals("font")){
+                return "do";
+            }
+            else if(word.equals("dois") || word.equals("devons") || word.equals("devez") || word.equals("doivent")){
+                return "have to";
+            }
+            else if(word.equals("doit")){
+                return "has to";
+            }
+            else if(word.equals("vais") || word.equals("vas") || word.equals("allons") || word.equals("allez") || word.equals("vont")){
+                return "go";
+            }
+            else if(word.equals("va")){
+                return "goes";
+            }
+            else if(word.equals("veux") || word.equals("voulons") || word.equals("voulez") || word.equals("veulent")){
+                return "want";
+            }
+            else if(word.equals("sais") || word.equals("savons") || word.equals("savez") || word.equals("savent")){
+                return "know";
             }
             else{
                 WordNode node = french.searchTree(word);
@@ -360,6 +392,8 @@ public class Translator
         int numOfEntries = 0;
         String eng = "";
         String fren = "";
+        String frenFile = openUserFileAndRead(cFrenchDictName);
+        String engFile = openUserFileAndRead(cEngDictName);
         System.out.println(
             "Enter each word you would like to add to the dictionary, pressing return between words\nLeave your entry blank and press return to return to the menu");
         System.out.print("English word: ");
@@ -368,12 +402,16 @@ public class Translator
         while (userString.length() != 0) {
             if (numOfEntries % 2 == 0) {
                 try {
-                    engBW.write(userString + "\n");
                     eng = userString;
+                    if(engFile.indexOf(eng) >= 0){
+                        System.out.println("That word already exists in the dictionary!");
+                        return false;
+                    }
+                    engBW.write(userString + "\n");
                     System.out.print("French word: "); // appends current word
                     // to custom english
                     // dictionary and asks
-                    // for the french
+                    // for the frenchs
                     // equivalent
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -381,8 +419,12 @@ public class Translator
                 }
             } else {
                 try {
-                    frBW.write(userString + "\n");
                     fren = userString;
+                    if(frenFile.indexOf(fren) >= 0){
+                        System.out.println("That word already exists in the dictionary!");
+                        return false;
+                    }
+                    frBW.write(userString + "\n");
                     System.out.print("English word: "); // appends current word
                     // to french dictionary
                     // and asks for a new
