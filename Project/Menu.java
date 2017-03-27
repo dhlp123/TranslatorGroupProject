@@ -152,10 +152,10 @@ public class Menu
             System.out.print("\nError, word couldn't be added");
         }
 
-        System.out.println("\nPlease press Enter to continue.");
+        System.out.println("Please press Enter to continue.");
         // Clear terminal
         Genio.getString();
-        System.out.print('\u000C');
+        System.out.print('\u000C');    
     }
 
     /**
