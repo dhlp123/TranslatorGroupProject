@@ -241,7 +241,13 @@ public class Translator
                 userSearch = Genio.getString();
                 continue;
             }
-            frenchWord = english.searchTree(userSearch).getFren();
+            if(userSearch.equals(null) == false && userSearch.equals("") == false){
+                System.out.println(userSearch+1);
+                frenchWord = english.searchTree(userSearch).getFren();
+            }
+            else{
+                return false;
+            }
             while (userEnd == false) {
                 index = searchableText.indexOf(userSearch);
                 indexEnd = index + userSearch.length();
@@ -255,7 +261,7 @@ public class Translator
                 while (true) {
                     if (userChoice == 'q' || userChoice == 'Q') {
                         userEnd = true;
-                        break;
+                        return false;
                     }
                     if (userChoice == 'y' || userChoice == 'Y') {
                         finalText.replace(index, indexEnd + 1, "");
