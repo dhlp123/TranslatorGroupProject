@@ -242,7 +242,8 @@ public class Translator
                 continue;
             }
             if(userSearch.equals(null) == false && userSearch.equals("") == false){
-                System.out.println(userSearch+1);
+                System.out.println(userSearch);
+                //Something wrong here
                 frenchWord = english.searchTree(userSearch).getFren();
             }
             else{
@@ -272,15 +273,9 @@ public class Translator
                         break;
                     }
                     if (userChoice == 'n' || userChoice == 'N') {
-                        savedIndex = indexEnd + 1;
-                        savedIndexFrench = indexEndFrench + 1;
-                        
-                        searchableText.replace(0, indexEnd + 1, "");
-                        searchableTextFrench.replace(0, indexEndFrench + 1, "");
-                        break;
+                        return deleteWords();
                     }
-                    System.out.println("Invalid character entered, Y to delete, N to search for next instance of \""
-                        + userSearch + "\" or Q to return to menu");
+                    System.out.println("Invalid character entered, Y to delete, N to search for another word or Q to return to menu");
                     userChoice = Genio.getCharacter();
                 }
             }
@@ -359,6 +354,7 @@ public class Translator
             if (numOfEntries % 2 == 0) {
                 try {
                     engBW.write(userString + "\n");
+                    eng = userString;
                     System.out.print("French word: "); // appends current word
                     // to custom english
                     // dictionary and asks
@@ -371,6 +367,7 @@ public class Translator
             } else {
                 try {
                     frBW.write(userString + "\n");
+                    fren = userString;
                     System.out.print("English word: "); // appends current word
                     // to french dictionary
                     // and asks for a new
@@ -384,8 +381,7 @@ public class Translator
             }
             numOfEntries++;
             userString = Genio.getString().toLowerCase();
-            fren = userString;
-            if(eng != null && fren != null){
+            if(eng.equals(null) == false && fren.equals(null) == false && eng.equals("") == false && fren.equals("") == false){
                 english.addToTree(eng, eng, fren);
                 french.addToTree(fren, eng, fren);
                 eng = "";
